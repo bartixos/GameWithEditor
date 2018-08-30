@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\ImGui;C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\GameWithEditor;D:\SFML-2.5.0-windows-vc15-32-bit\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\ImGui;C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\GameWithEditor;D:\LIBS\cereal-1.2.2\include;D:\SFML-2.5.0-windows-vc15-32-bit\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -100,7 +100,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\ImGui;C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\GameWithEditor;D:\SFML-2.5.0-windows-vc15-32-bit\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\ImGui;C:\Users\pilas\OneDrive\Dokumenty\Visual Studio 2017\Projects\GameWithEditor\GameWithEditor;D:\LIBS\cereal-1.2.2\include;D:\SFML-2.5.0-windows-vc15-32-bit\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -129,12 +129,22 @@
     <ClCompile Include="..\ImGui\imgui-master\imgui.cpp" />
     <ClCompile Include="..\ImGui\imgui-master\imgui_demo.cpp" />
     <ClCompile Include="..\ImGui\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="Core\Object\Components\AComponent.cpp" />
+    <ClCompile Include="Core\Object\Components\CTransform.cpp" />
+    <ClCompile Include="Core\Object\Components\RenderComponent\CARenderer.cpp" />
+    <ClCompile Include="Core\Object\Components\RenderComponent\CSpriteRenderer.cpp" />
+    <ClCompile Include="Core\Object\GameObject.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Utility\ASingleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ImGui\imgui-master\imconfig.h" />
     <ClInclude Include="Core\Math\Vector2.h" />
+    <ClInclude Include="Core\Object\Components\AComponent.h" />
+    <ClInclude Include="Core\Object\Components\CTransform.h" />
+    <ClInclude Include="Core\Object\Components\RenderComponent\CARenderer.h" />
+    <ClInclude Include="Core\Object\Components\RenderComponent\CSpriteRenderer.h" />
+    <ClInclude Include="Core\Object\GameObject.h" />
     <ClInclude Include="Core\Resource\AResourceManager.h" />
     <ClInclude Include="Core\Resource\FontManager.h" />
     <ClInclude Include="Core\Resource\Resources.h" />

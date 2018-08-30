@@ -18,6 +18,6 @@ public:
 		{
 			instnace = SharedPtr<T>(new T);
 		}
-		return std::move(instnace);
+		return instnace;
 	}
 };
