@@ -41,9 +41,6 @@ GameObject::GameObject()
 	AddComponent<CTransform>(transform);
 	//transform = GetComponent<CTransform>();
 	transform->Move({ 200,200 });
-
-	sprite = new CSpriteRenderer();
-	AddComponent<CSpriteRenderer>(sprite);
 }
 
 GameObject::~GameObject()
@@ -75,22 +72,12 @@ void GameObject::ComponentInitialize()
 
 void GameObject::Draw(sf::RenderWindow & window)
 {
-	if (sprite)
-	{
-		sprite->Draw(window);
-	}
 }
 
 void GameObject::Initialize()
 {
-	sprite = (GetComponent<CSpriteRenderer>());
-	sprite->LoadTexture("Player", "statek.png");
-
-	//renderer->SetOffsetPosition(20, 300);
 }
 
 void GameObject::Update(float delta)
 {
-	transform->Move(0, 100 * delta);
-	LOG(GetPosition().ToString());
 }

@@ -25,11 +25,27 @@ class GameObject
 protected:
 	std::string tag = "";
 	std::string name = "GameObject";
-
+	int id;
 	CTransform *transform;
 
+	GameObject *parent = nullptr;
+
+	std::array<GameObject*, 20> childrens;
 	//todo: Add RenderComponent and Set it in AddComponent
 public:
+
+	void SetParent(GameObject *object) noexcept
+	{
+		if (object)
+		{
+			parent = object;
+		}
+	}
+
+	GameObject *GetParent()const noexcept
+	{
+		return parent;
+	}
 
 	size_t GetComponentNumber() noexcept;
 	void SetComponentsOwner();
@@ -39,6 +55,8 @@ public:
 	T* AddComponent(T* comp);
 	const std::string&  GetTag() const noexcept { return tag; };
 	const std::string& GetName() const noexcept { return name; };
+	int GetId() const noexcept { return id; };
+	void SetId(int _id) noexcept { id = _id; };
 	void SetName(const std::string& _name) noexcept { name = _name; };
 	void SetTag(const std::string &_tag) noexcept { tag = _tag; };
 
@@ -57,9 +75,6 @@ public:
 	template<typename T>
 	T* GetComponent();
 
-	//////////////////////////////////TEST//////////////////////////////
-	CSpriteRenderer *sprite;
-
 	template<typename Archive>
 	void load(Archive& archive)
 	{
@@ -70,7 +85,7 @@ public:
 	template<typename Archive>
 	void save(Archive& archive) const
 	{
-		archive(CEREAL_NVP_("tag", tag), CEREAL_NVP_("Name", name), CEREAL_NVP_("Component_list", componentList)/* CEREAL_NVP_("Component List", componentList)*/);
+		archive(CEREAL_NVP_("tag", tag), CEREAL_NVP_("Id", id), CEREAL_NVP_("Name", name), CEREAL_NVP_("Component_list", componentList)/* CEREAL_NVP_("Component List", componentList)*/);
 	}
 };
 

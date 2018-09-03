@@ -129,16 +129,21 @@
     <ClCompile Include="..\ImGui\imgui-master\imgui.cpp" />
     <ClCompile Include="..\ImGui\imgui-master\imgui_demo.cpp" />
     <ClCompile Include="..\ImGui\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\Object\Components\AComponent.cpp" />
     <ClCompile Include="Core\Object\Components\CTransform.cpp" />
     <ClCompile Include="Core\Object\Components\RenderComponent\CARenderer.cpp" />
     <ClCompile Include="Core\Object\Components\RenderComponent\CSpriteRenderer.cpp" />
     <ClCompile Include="Core\Object\GameObject.cpp" />
+    <ClCompile Include="Core\Resource\WindowManager.cpp" />
+    <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Utility\ASingleton.cpp" />
+    <ClCompile Include="Utility\FPSCounter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ImGui\imgui-master\imconfig.h" />
+    <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\Math\Vector2.h" />
     <ClInclude Include="Core\Object\Components\AComponent.h" />
     <ClInclude Include="Core\Object\Components\CTransform.h" />
@@ -149,8 +154,12 @@
     <ClInclude Include="Core\Resource\FontManager.h" />
     <ClInclude Include="Core\Resource\Resources.h" />
     <ClInclude Include="Core\Resource\TextureManager.h" />
+    <ClInclude Include="Core\Resource\WindowManager.h" />
+    <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Utility\ASingleton.h" />
     <ClInclude Include="Utility\Define.h" />
+    <ClInclude Include="Utility\FPSCounter.h" />
+    <ClInclude Include="Utility\GameTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
