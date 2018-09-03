@@ -2,41 +2,54 @@
 #include "SFML/System.hpp"
 #include "Utility/Define.h"
 #include "imgui-master/imgui.h"
+#include "cereal/cereal.hpp"
+
 struct Vector2
 {
 	float x, y;
 
+	template<typename Archive>
+	void save(Archive& archive) const
+	{
+		archive(CEREAL_NVP_("X", x), CEREAL_NVP_("Y", y));
+	}
+	template<typename Archive>
+	void load(Archive& archive)
+	{
+		archive(CEREAL_NVP_("X", x), CEREAL_NVP_("Y", y));
+	}
+
 #pragma region Constuct Regiom
 
-	Vector2() :
+	Vector2()noexcept :
 		x(0), y(0)
 	{}
 
-	Vector2(float x, float y) :
+	Vector2(float x, float y)noexcept :
 		x(x), y(y)
 	{}
 
-	Vector2(const Vector2& vec) :
+	Vector2(const Vector2& vec)noexcept :
 		x(vec.x), y(vec.y)
 	{}
 
-	Vector2(Vector2 && vec) :
+	Vector2(Vector2 && vec) noexcept :
 		x(std::move(vec.x)), y(std::move(vec.y))
 	{}
 
-	Vector2(const sf::Vector2f& vec) :
+	Vector2(const sf::Vector2f& vec)noexcept :
 		x(vec.x), y(vec.y)
 	{	}
 
-	Vector2(const sf::Vector2i& vec) :
+	explicit	Vector2(const sf::Vector2i& vec)noexcept :
 		x(static_cast<float>(vec.x)), y(static_cast<float>(vec.y))
 	{	}
 
-	Vector2(const sf::Vector2u& vec) :
+	Vector2(const sf::Vector2u& vec)noexcept :
 		x(static_cast<float>(vec.x)), y(static_cast<float>(vec.y))
 	{	}
 
-	Vector2(const ImVec2& vec) :
+	Vector2(const ImVec2& vec)noexcept :
 		x(static_cast<float>(vec.x)), y(static_cast<float>(vec.y))
 	{	}
 

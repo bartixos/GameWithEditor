@@ -1,5 +1,6 @@
 #include "CTransform.h"
 
+#include <cereal/types/polymorphic.hpp>
 CTransform::CTransform(GameObject * owner) :
 	AComponent(owner)
 {
@@ -7,16 +8,12 @@ CTransform::CTransform(GameObject * owner) :
 	//name = "TransformComponent";
 }
 
-CTransform::CTransform(const AComponent & comp) :
-	AComponent(comp)
+CTransform::CTransform()
 {
-}
-
-CTransform::CTransform(AComponent && comp) :
-	AComponent(std::move(comp))
-{
+	componentType = ComponentType::Transformable;
 }
 
 void CTransform::Initialize()
 {
+	componentType = ComponentType::Transformable;
 }

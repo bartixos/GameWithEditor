@@ -1,60 +1,53 @@
 #include "GameObject.h"
 
+void GameObject::SetComponentOwner()
+{
+	for (auto& comp : componentList)
+	{
+		if (comp && comp->GetOwner())
+		{
+			comp->SetOwnerIfNull(this);
+		}
+	}
+}
+
+size_t GameObject::GetComponentNumber() noexcept
+{
+	size_t number = 0;
+	for (auto& comp : componentList)
+	{
+		if (comp)
+		{
+			number += 1;
+		}
+	}
+	return number;
+}
+
+void GameObject::SetComponentsOwner()
+{
+	for (auto& comp : componentList)
+	{
+		if (comp)
+		{
+			comp->SetOwnerIfNull(this);
+		}
+	}
+}
+
 GameObject::GameObject()
 {
-	transform = std::make_unique<CTransform>(this);
-	AddComponent(&*transform);
+	transform = new CTransform();
+	AddComponent<CTransform>(transform);
+	//transform = GetComponent<CTransform>();
 	transform->Move({ 200,200 });
 
-	sprite = std::make_unique<CSpriteRenderer>(this);
-	AddComponent(&*sprite);
+	sprite = new CSpriteRenderer();
+	AddComponent<CSpriteRenderer>(sprite);
 }
 
 GameObject::~GameObject()
 {
-	renderer = nullptr;
-}
-
-AComponent * GameObject::AddComponent(AComponent * component)
-{
-	if (!component->CanBeMultiple())
-	{
-		for (auto& comp : componentList)
-		{
-			if (!comp)
-				continue;
-			else
-			{
-				if (comp->GetComponentType() == component->GetComponentType())
-				{
-					delete component;
-					component = nullptr;
-					LOG("Cannot add This component with this type becouse can only be one Component with this type ");
-					return nullptr;
-				}
-			}
-		}
-	}
-
-	for (auto& comp : componentList)
-	{
-		if (!comp)
-		{
-			if (component->GetComponentType() == ComponentType::Renderer)
-			{
-				renderer = dynamic_cast<CARenderer*>(component);
-			}
-			comp = component;
-			component->Initialize();
-			return comp;
-		}
-	}
-
-	delete component;
-	component = nullptr;
-
-	LOG("Cannot Add component");
-	return nullptr;
 }
 
 void GameObject::ComponentUpdate(float delta)
@@ -74,6 +67,7 @@ void GameObject::ComponentInitialize()
 	{
 		if (comp)
 		{
+			comp->SetOwnerIfNull(this);
 			comp->Initialize();
 		}
 	}
@@ -81,15 +75,18 @@ void GameObject::ComponentInitialize()
 
 void GameObject::Draw(sf::RenderWindow & window)
 {
-	if (renderer)
+	if (sprite)
 	{
-		renderer->Draw(window);
+		sprite->Draw(window);
 	}
 }
 
 void GameObject::Initialize()
 {
+	sprite = (GetComponent<CSpriteRenderer>());
 	sprite->LoadTexture("Player", "statek.png");
+
+	//renderer->SetOffsetPosition(20, 300);
 }
 
 void GameObject::Update(float delta)

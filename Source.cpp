@@ -8,11 +8,65 @@
 #include "imgui-master/imgui-SFML.h"
 #include "Core/Object/GameObject.h"
 
+#include "cereal/archives/binary.hpp"
+#include "cereal/types/memory.hpp"
+#include <fstream>
+#include "Core/Object/Components/RenderComponent/CSpriteRenderer.h"
 int main()
 {
 	UniquePtr<GameObject> object = std::make_unique<GameObject>();
 	object->ComponentInitialize();
+
 	object->Initialize();
+
+	//int a = 20;
+	std::string file = "Save4.txt";
+	std::ofstream save(file);
+	{
+		cereal::BinaryOutputArchive archive(save);
+		object->SetTag("Kappa123");
+		object->SetName("Gracz 123");
+		object->GetTransform()->SetPosition(200, 300);
+
+		archive(CEREAL_NVP(object));
+	}
+	save.close();
+	UniquePtr<GameObject> object2;
+
+	{
+		std::ifstream load;
+		load.open(file);
+		if (load.is_open())
+		{
+			cereal::BinaryInputArchive archive(load);
+			archive(object2);
+
+			LOG(object2->GetName());
+			LOG(object2->GetTag());
+			LOG(object2->GetComponent<CSpriteRenderer>()->GetOffsetPosition().ToString());
+			LOG(object2->GetComponent<CSpriteRenderer>()->GetTextureName());
+			LOG(object2->GetComponent<CSpriteRenderer>()->GetTexturePath());
+			LOG(object2->GetComponentNumber());
+			load.close();
+		}
+	}
+
+	LOG(object2->GetName());
+	LOG(object2->GetTag());
+	LOG(object2->GetComponentNumber());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetOffsetPosition().ToString());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetTextureName());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetTexturePath());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetOffsetPosition().ToString());
+
+	object2->Initialize();
+	object2->ComponentInitialize();
+	LOG(object2->GetName());
+	LOG(object2->GetTag());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetOffsetPosition().ToString());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetTextureName());
+	LOG(object2->GetComponent<CSpriteRenderer>()->GetTexturePath());
+
 	LOG(1);
 
 	auto trans = object->GetComponent<CSpriteRenderer>();
@@ -23,9 +77,10 @@ int main()
 
 	Vector2 cos;
 
-	sf::View view({ 200,50 }, { 800, 600 });
-
+	object2->GetTransform()->SetPosition(400, 500);
 	sf::Clock deltaClock;
+
+	object2->SetComponentsOwner();
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -36,8 +91,8 @@ int main()
 			}
 		}
 
-		object->Update(0.001f);
-		object->ComponentUpdate(0.001f);
+		object2->Update(0.001f);
+		object2->ComponentUpdate(0.001f);
 
 		ImGui::SFML::Update(window, deltaClock.restart());
 
@@ -50,7 +105,6 @@ int main()
 			LOG(cos.ToString());
 		}
 
-		window.setView(view);
 		//	ImGui::Image(*resources->GetResource("Player"));
 		ImGui::InputFloat2("Vector", &cos.x);
 
@@ -58,11 +112,13 @@ int main()
 
 		window.clear();
 
-		//window.draw(*sprite);
-		object->Draw(window);
+		object2->Draw(window);
+		//object->Draw(window);
 		ImGui::SFML::Render(window);
 		window.display();
 	}
 	ImGui::SFML::Shutdown();
+
+	//todo: do culling oclusion with window view
 	return 0;
 }

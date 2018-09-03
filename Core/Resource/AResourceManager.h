@@ -7,7 +7,7 @@ template<typename T>
 class ResourceManager
 {
 protected:
-	using ResourcesMap = std::unordered_map<std::string, SharedPtr<T>>;
+	using ResourcesMap = std::unordered_map<std::string, UniquePtr<T>>;
 	ResourcesMap resourceMap;
 
 	ResourceManager();
@@ -21,10 +21,10 @@ public:
 	bool Exist(const std::string &name);
 
 	//Load from file and get resources
-	//Path is a from folder "Assets/path"
-	SharedPtr<T> LoadResource(const std::string &name, const std::string &path);
+	//Path is a from folder "Assets/" + path
+	T* LoadResource(const std::string &name, const std::string &path);
 	//Get resource if is Loaded else return null
-	SharedPtr<T> GetResource(const std::string &name);
+	T* GetResource(const std::string &name);
 };
 
 template<typename T>
@@ -44,32 +44,34 @@ inline bool ResourceManager<T>::Exist(const std::string & name)
 }
 
 template<typename T>
-inline SharedPtr<T> ResourceManager<T>::LoadResource(const std::string & name, const std::string & path)
+inline T* ResourceManager<T>::LoadResource(const std::string & name, const std::string & path)
 {
 	if (Exist(name))
 	{
-		return std::move(resourceMap[name]);
+		return resourceMap[name].get();
 	}
 	else
 	{
 		std::string _path("Assets/" + path);
 
-		resourceMap.insert_or_assign(name, std::make_shared<T>());
+
+		resourceMap.insert_or_assign(name, std::make_unique<T>());
 		if (!resourceMap[name]->loadFromFile(_path))
 		{
 			LOG("Cannot Load Texture: " + name + " path: " + _path);
 		}
 
-		return resourceMap[name];
+		auto result = resourceMap[name].get();
+		return result;
 	}
 }
 
 template<typename T>
-inline SharedPtr<T> ResourceManager<T>::GetResource(const std::string & name)
+inline T* ResourceManager<T>::GetResource(const std::string & name)
 {
 	if (Exist(name))
 	{
-		return resourceMap[name];
+		return resourceMap[name].get();
 	}
 	else
 		return nullptr;

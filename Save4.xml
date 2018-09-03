@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cereal>
+	<object>
+		<polymorphic_id>1073741824</polymorphic_id>
+		<ptr_wrapper>
+			<valid>1</valid>
+			<data>
+				<tag>Kappa123</tag>
+				<Name>Gracz 123</Name>
+				<Component_list>
+					<value0>
+						<polymorphic_id>2147483649</polymorphic_id>
+						<polymorphic_name>CTransform</polymorphic_name>
+						<ptr_wrapper>
+							<valid>1</valid>
+							<data>
+								<value0>
+									<Component Type>2</Component Type>
+								</value0>
+								<position>
+									<X>200</X>
+									<Y>300</Y>
+								</position>
+								<rotation>0</rotation>
+							</data>
+						</ptr_wrapper>
+					</value0>
+					<value1>
+						<polymorphic_id>2147483650</polymorphic_id>
+						<polymorphic_name>CSpriteRenderer</polymorphic_name>
+						<ptr_wrapper>
+							<valid>1</valid>
+							<data>
+								<value0>
+									<value0>
+										<Component Type>1</Component Type>
+									</value0>
+									<Position offset>
+										<X>0</X>
+										<Y>0</Y>
+									</Position offset>
+								</value0>
+								<Texture Name>Player</Texture Name>
+								<Texture Path>statek.png</Texture Path>
+							</data>
+						</ptr_wrapper>
+					</value1>
+					<value2>
+						<polymorphic_id>0</polymorphic_id>
+					</value2>
+					<value3>
+						<polymorphic_id>0</polymorphic_id>
+					</value3>
+					<value4>
+						<polymorphic_id>0</polymorphic_id>
+					</value4>
+					<value5>
+						<polymorphic_id>0</polymorphic_id>
+					</value5>
+					<value6>
+						<polymorphic_id>0</polymorphic_id>
+					</value6>
+					<value7>
+						<polymorphic_id>0</polymorphic_id>
+					</value7>
+					<value8>
+						<polymorphic_id>0</polymorphic_id>
+					</value8>
+					<value9>
+						<polymorphic_id>0</polymorphic_id>
+					</value9>
+					<value10>
+						<polymorphic_id>0</polymorphic_id>
+					</value10>
+					<value11>
+						<polymorphic_id>0</polymorphic_id>
+					</value11>
+					<value12>
+						<polymorphic_id>0</polymorphic_id>
+					</value12>
+					<value13>
+						<polymorphic_id>0</polymorphic_id>
+					</value13>
+					<value14>
+						<polymorphic_id>0</polymorphic_id>
+					</value14>
+					<value15>
+						<polymorphic_id>0</polymorphic_id>
+					</value15>
+				</Component_list>
+			</data>
+		</ptr_wrapper>
+	</object>
+</cereal>
+
