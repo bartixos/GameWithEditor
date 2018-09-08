@@ -40,7 +40,7 @@ GameObject::GameObject()
 	transform = new CTransform();
 	AddComponent<CTransform>(transform);
 	//transform = GetComponent<CTransform>();
-	transform->Move({ 200,200 });
+	//transform->Move({ 200,200 });
 }
 
 GameObject::~GameObject()

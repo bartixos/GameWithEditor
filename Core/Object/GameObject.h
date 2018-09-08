@@ -31,7 +31,7 @@ protected:
 	GameObject *parent = nullptr;
 
 	std::array<GameObject*, 20> childrens;
-	//todo: Add RenderComponent and Set it in AddComponent
+
 public:
 
 	void SetParent(GameObject *object) noexcept
@@ -78,16 +78,16 @@ public:
 	template<typename Archive>
 	void load(Archive& archive)
 	{
-		//archive(CEREAL_NVP_("tag", tag), CEREAL_NVP_("Name", name), CEREAL_NVP_("Component List", componentList));
-		//archive(cereal::make_nvp("tag", tag), cereal::make_nvp("name", name)/* componentList*/);
-		archive(tag, name, componentList);
+		archive(CEREAL_NVP_("tag", tag), CEREAL_NVP_("Id", id), CEREAL_NVP_("Name", name), CEREAL_NVP_("Component List", componentList));
+		transform = GetComponent<CTransform>();
 	}
 	template<typename Archive>
 	void save(Archive& archive) const
 	{
-		archive(CEREAL_NVP_("tag", tag), CEREAL_NVP_("Id", id), CEREAL_NVP_("Name", name), CEREAL_NVP_("Component_list", componentList)/* CEREAL_NVP_("Component List", componentList)*/);
+		archive(CEREAL_NVP_("tag", tag), CEREAL_NVP_("Id", id), CEREAL_NVP_("Name", name), CEREAL_NVP_("Component_list", componentList));
 	}
 };
+CEREAL_REGISTER_TYPE(GameObject);
 
 template<typename T>
 inline T * GameObject::GetComponent()
